@@ -3,7 +3,6 @@ import Header from "../../layouts/Admin-Layouts/admin-header";
 import Sidemenu from "../../layouts/Admin-Layouts/admin-sidemenu";
 import User_avatar1 from '../../assets/images/faces/11.jpg';
 
-
 function AdminDashboard() {
     return (
         <>
@@ -32,7 +31,6 @@ function AdminDashboard() {
                             </div>
                         </div>
 
-
                         {/* Metrics Section */}
                         <div className="col-span-9 md:col-span-10">
                             <div className="box overflow-hidden main-content-card">
@@ -43,6 +41,8 @@ function AdminDashboard() {
                                             { icon: "bi bi-speedometer2", label: "Total Motorcycles Listed", details: "8" },
                                             { icon: "bi bi-file-earmark-text-fill", label: "New Application Requests", details: "1" },
                                             { icon: "bi bi-clock-fill", label: "Pending Approvals", details: "1" },
+                                            { icon: "bi bi-check-circle-fill", label: "Approved Applications", details: "5" },
+                                            { icon: "bi bi-x-circle-fill", label: "Rejected Applications", details: "2" },
                                         ].map((metric) => (
                                             <li key={metric.label} className="flex items-center gap-3 border p-4 rounded-lg bg-white shadow-md">
                                                 <i className={`${metric.icon} text-blue-500 text-xl`}></i>
@@ -64,6 +64,8 @@ function AdminDashboard() {
                             <h3 className="text-lg font-semibold text-blue-800 mb-4">Recent Registrations</h3>
                             <ul className="list-disc pl-6 text-blue-600 space-y-2">
                                 <li>John Doe - Registered on 2025-03-15</li>
+                                <li>Jane Doe - Registered on 2025-03-16</li>
+                                <li>Bob Smith - Registered on 2025-03-17</li>
                             </ul>
                         </div>
 
@@ -75,6 +77,25 @@ function AdminDashboard() {
                             </p>
                         </div>
 
+                        {/* Top Motorcycle Models */}
+                        <div className="box bg-green-100 rounded-lg shadow-md p-6 border border-black">
+                            <h3 className="text-lg font-semibold text-green-800 mb-4">Top Motorcycle Models</h3>
+                            <ul className="list-disc pl-6 text-green-600 space-y-2">
+                                <li>Harley-Davidson - 10 registrations</li>
+                                <li>Yamaha - 8 registrations</li>
+                                <li>Kawasaki - 6 registrations</li>
+                            </ul>
+                        </div>
+
+                        {/* Registration by Location */}
+                        <div className="box bg-red-100 rounded-lg shadow-md p-6 border border-black">
+                            <h3 className="text-lg font-semibold text-red-800 mb-4">Registration by Location</h3>
+                            <ul className="list-disc pl-6 text-red-600 space-y-2">
+                                <li>Tagoloan - 10 registrations</li>
+                                <li>Bugo - 8 registrations</li>
+                                <li>Casinglot - 6 registrations</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
