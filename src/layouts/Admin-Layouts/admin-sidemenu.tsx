@@ -20,7 +20,7 @@ function Sidemenu() {
                         <ul className='main-menu pt-5'>
                             <li className='slide__category '><span className='category-name'>Main</span></li>
                             <li className='slide'>
-                                <Link to="/admin" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:bg-green-700 transition duration-300 ease-in-out shadow-md">
+                                <Link to="/admin" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:transition duration-300 ease-in-out shadow-md">
                                     <i className='w-6 h-4 side-menu__icon bi bi-layout-text-window-reverse color'></i>
                                     <span className='side-menu__label text-blue-900'>
                                         Dashboard &ensp;
@@ -31,7 +31,7 @@ function Sidemenu() {
 
                             <div className='p-2'></div>
                             <li className='slide'>
-                                <Link to="/user-management" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:bg-green-700 transition duration-300 ease-in-out shadow-md">
+                                <Link to="/user-management" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:transition duration-300 ease-in-out shadow-md">
                                     <i className='w-6 h-4 side-menu__icon bi bi-journal-text'></i>
                                     <span className='side-menu__label'>
                                     User management
@@ -41,7 +41,7 @@ function Sidemenu() {
 
                             <div className='p-2'></div>
                             <li className='slide'>
-                                <Link to="/application-request" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:bg-green-700 transition duration-300 ease-in-out shadow-md">
+                                <Link to="/application-request" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:transition duration-300 ease-in-out shadow-md">
                                     <i className='w-1 h-4 side-menu__icon bi bi-journal-text'></i>
                                     <span className='side-menu__label'>
                                     Application requests &ensp;
@@ -52,7 +52,7 @@ function Sidemenu() {
 
                             <div className=' p-2'></div>
                             <li className='slide'>
-                                <Link to="/admin-motorcycles" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:bg-green-300 transition duration-300 ease-in-out shadow-md">
+                                <Link to="/admin-motorcycles" className="side-menu__item flex items-center gap-2 px-4 py-3 rounded-lg text-white bg-red-200 hover:duration-300 ease-in-out shadow-md">
                                     <i className='w-6 h-4 side-menu__icon bi bi-speedometer2'></i>
                                     <span className='side-menu__label'>
                                         Motorcycles &ensp;
