@@ -111,22 +111,6 @@ function Details() {
                   </div>
 
                   <hr className="my-4" />
-
-                  {/* Upload Motorcycle Image */}
-                  <div className="relative">
-                    <label className="block font-medium mb-1">Upload Motorcycle Image</label>
-                    <div className="flex gap-2">
-                      <button type="button" className="btn btn-secondary">
-                        <i className="bi bi-upload"></i> Upload
-                      </button>
-                      <button type="button" className="btn btn-danger">
-                        <i className="bi bi-x-circle"></i> Remove
-                      </button>
-                    </div>
-                  </div>
-
-                  <hr className="my-4" />
-
                   
                   {/* Upload Motorcycle Image */}
                   <div className="relative">
