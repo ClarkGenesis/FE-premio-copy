@@ -127,13 +127,41 @@ function Details() {
 
                   <hr className="my-4" />
 
+                  
+                  {/* Upload Motorcycle Image */}
+                  <div className="relative">
+                    <label className="block font-medium mb-1">Upload Motorcycle Image</label>
+                    <div className="flex gap-2">
+                      <input 
+                        type="file" 
+                        accept=".jpg, .jpeg, .png, .gif, .bmp" 
+                        className="hidden"
+                        id="motorcycle-image-upload"
+                      />
+                      <label htmlFor="motorcycle-image-upload" className="btn btn-secondary">
+                        <i className="bi bi-upload"></i> Upload
+                      </label>
+                      <button type="button" className="btn btn-danger">
+                        <i className="bi bi-x-circle"></i> Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <hr className="my-4" />
+
                   {/* Upload Specification Table Image */}
                   <div className="relative">
                     <label className="block font-medium mb-1">Upload Specification Table Image</label>
                     <div className="flex gap-2">
-                      <button type="button" className="btn btn-secondary">
+                      <input 
+                        type="file" 
+                        accept=".jpg, .jpeg, .png, .gif, .bmp" 
+                        className="hidden"
+                        id="specification-table-image-upload"
+                      />
+                      <label htmlFor="specification-table-image-upload" className="btn btn-secondary">
                         <i className="bi bi-upload"></i> Upload
-                      </button>
+                      </label>
                       <button type="button" className="btn btn-danger">
                         <i className="bi bi-x-circle"></i> Remove
                       </button>
@@ -146,14 +174,21 @@ function Details() {
                   <div className="relative">
                     <label className="block font-medium mb-1">Upload Related Motorcycle Image</label>
                     <div className="flex gap-2">
-                      <button type="button" className="btn btn-secondary">
+                      <input 
+                        type="file" 
+                        accept=".jpg, .jpeg, .png, .gif, .bmp" 
+                        className="hidden"
+                        id="related-motorcycle-image-upload"
+                      />
+                      <label htmlFor="related-motorcycle-image-upload" className="btn btn-secondary">
                         <i className="bi bi-upload"></i> Upload
-                      </button>
+                      </label>
                       <button type="button" className="btn btn-danger">
                         <i className="bi bi-x-circle"></i> Remove
                       </button>
                     </div>
                   </div>
+
 
                   {/* Action Buttons */}
                   <div className="mt-4 flex justify-end gap-4">
@@ -170,7 +205,6 @@ function Details() {
                     </button>
                   </div>
                 </form>
-
                 </div>
               </div>
             </div>
