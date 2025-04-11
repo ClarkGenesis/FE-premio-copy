@@ -84,7 +84,9 @@ function Details() {
                             id={name}
                             name={name}
                             placeholder={`Enter ${label}`}
-                            value={(formData as any)[name] || ""}
+                            value={typeof formData[name as keyof FormData] === "string" || typeof formData[name as keyof FormData] === "number"
+                              ? String(formData[name as keyof FormData] ?? "")
+                              : ""}
                             onChange={handleChange}
                             className="ti-form-input rounded-sm ps-11 focus:z-10"
                           />

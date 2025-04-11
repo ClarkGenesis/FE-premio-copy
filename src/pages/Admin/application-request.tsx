@@ -28,32 +28,31 @@ const ApplicationRequest: React.FC = () => {
                     },
                     { name: "Email", width: "200px" },
                     { name: "Motorcycle", width: "200px" },
-                    {   
+                    {
                         name: "Actions",
                         width: "320px",
                         formatter: () =>
                             html(`
                                 <div class="flex justify-center gap-2">
 
-                                    <a href="/aform" 
+                                    <a href="/aform"
                                         class="bg-blue-500 text-white px-1 py-1 rounded text-xs flex items-center">
                                         <i class="ri-eye-line"></i>
                                         <span class="px-1">View Registration Form</span>
                                     </a>
 
-                                    <a href="#" 
+                                    <a href="#"
                                         class="bg-green-500 text-white px-1 py-1 rounded text-xs flex items-center">
                                         <i class="bi bi-check-circle"></i>
                                         <span class="px-1">Approve</span>
                                     </a>
-                        
+
                                     <button class="bg-red-500 text-white px-2 py-1 rounded text-xs flex items-center">
                                         <i class="ri-close-circle-line mr-1"></i>
                                         <span class="px-1">Disapprove</span>
                                     </button>
                                 </div>
                             `)
-                        
                     },
                 ],
                 pagination: { limit: 10 },

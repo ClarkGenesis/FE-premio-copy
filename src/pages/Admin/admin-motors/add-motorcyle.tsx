@@ -32,7 +32,7 @@ const initialFormData: FormData = {
   photo: null,
 };
 
-function addMotorcyle() {
+function AddMotorcycle() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -84,7 +84,9 @@ function addMotorcyle() {
                             id={name}
                             name={name}
                             placeholder={`Enter ${label}`}
-                            value={(formData as any)[name] || ""}
+                            value={typeof formData[name as keyof FormData] === "string" || typeof formData[name as keyof FormData] === "number"
+                              ? formData[name as keyof FormData]?.toString()
+                              : ""}
                             onChange={handleChange}
                             className="ti-form-input rounded-sm ps-11 focus:z-10"
                           />
@@ -200,4 +202,4 @@ function addMotorcyle() {
   );
 }
 
-export default addMotorcyle;
+export default AddMotorcycle;

@@ -131,7 +131,7 @@ function AdminSuzukiF() {
 
 
                                 </div>
-                                    <h4 className="mt-8 mb-2">Related Products</h4>
+                                    <h4 className="mt-8 mb-2">Related Models</h4>
                                         <p>
                                         Explore our featured motorcycles, starting with top models like the Suzuki GSX-S150. More models coming soon
                                         </p>

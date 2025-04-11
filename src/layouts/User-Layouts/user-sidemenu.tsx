@@ -7,11 +7,9 @@ function Sidemenu() {
         <>
             <aside className="app-sidebar" id="sidebar">
                 <div className="main-sidebar-header">
-                <a href=''>
                     <center>
                         <img src={logo2} className='transparent-shadow' style={{ maxHeight: '500px' }} />
                     </center>
-                </a>
                 </div>
                 <div className='main-sidebar' id="sidebar-scroll">
                     <nav className="main-menu-container nav nav-pills flex-col sub-open ">

@@ -17,8 +17,7 @@ function PreRegistrations() {
 
         <div className="xxl:col-span-9 col-span-12">
           <div className="box overflow-hidden main-content-card">
-            <div className="box-body p-3">
-              <h3 className="text-lg font-semibold text-black">Pre-Registration Status</h3>
+
               <div className="bg-gray-100 p-4 mt-4 rounded-lg shadow-md">
                 <p className="mt-3">
                   Status:{" "}
@@ -175,8 +174,6 @@ function PreRegistrations() {
             </button>
           </div>
         </div>
-
-      </div>
     </>
   );
 }

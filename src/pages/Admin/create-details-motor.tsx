@@ -16,6 +16,7 @@ interface FormData {
   barangay: string;
   postalCode: string;
   photo?: File | null;
+  [key: string]: string | File | null | undefined; // Allow additional fields dynamically
 }
 
 const initialFormData: FormData = {
@@ -77,20 +78,19 @@ function CreateDetail() {
                           <label htmlFor={name} className="block font-medium mb-1">
                             {label}
                           </label>
-                          <div className="relative">
+                            <div className="relative">
                             <input
                               type={type}
                               id={name}
                               name={name}
-                              placeholder={`Enter ${label}`}
-                              value={(formData as any)[name] || ""}
+                              value={formData[name as keyof FormData] as string || ""}
                               onChange={handleChange}
                               className="ti-form-input rounded-sm ps-11 focus:z-10"
                             />
                             <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
                               <i className={icon}></i>
                             </div>
-                          </div>
+                            </div>
                         </div>
                       ))}
 

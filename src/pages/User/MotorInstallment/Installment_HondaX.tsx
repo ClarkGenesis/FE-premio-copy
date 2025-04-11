@@ -68,7 +68,6 @@ function HondaX150() {
                                     links={[{ text: "Honda All New Winner X", link: "/HondaX" }]}
                                     active="Installment Carculator"/> 
                     <div className="p-4">
-                        <h2 className="text-lg font-bold">Installment Calculator</h2>
                         <p className="mt-2">
                             The calculator will help you determine the estimated monthly payments for your desired motorcycle loan.
                             Please visit our branch to get a final computation.

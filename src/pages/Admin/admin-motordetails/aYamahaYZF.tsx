@@ -47,7 +47,7 @@ function AdminYamahaZ() {
 
                                 <h4 className="mt-4 mb-2">Description</h4>
                                 <p className="text-gray-700">
-                                The YZF-R15M redefines innovation on the racetrack. A highly precise machine that has been crafted for superior performance, advanced with the latest technology, and designed true to the R brand. Now enhanced with Y-Connect compatibility, linking you with your motorcycle for a whole new experience.​
+                                The YZF-R15M redefines innovation on the racetrack. A highly precise machine that has been crafted for superior performance, advanced with the latest technology, and designed true to the R brand. Now enhanced with Y-Connect compatibility, linking you with your motorcycle for a whole new experience.
                                 </p>
 
                                 <h4 className="mt-6 mb-2 flex ">Specification</h4>
@@ -133,7 +133,7 @@ function AdminYamahaZ() {
 
 
                                 </div>
-                                    <h4 className="mt-8 mb-2">Related Products</h4>
+                                    <h4 className="mt-8 mb-2">Related Models</h4>
                                         <p>
                                         Explore our featured motorcycles, starting with Yamaha YZF-R15M. More models coming soon
                                         </p>

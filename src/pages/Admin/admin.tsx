@@ -60,17 +60,17 @@ function AdminDashboard() {
                     {/* Additional Content Sections */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
                         {/* Recent Registrations */}
-                        <div className="box bg-blue-100 rounded-lg shadow-lg p-6 border border-black">
+                        <div className="box bg-red-100 rounded-lg shadow-lg p-6 border border-black">
                             <h3 className="text-lg font-semibold text-blue-800 mb-4">Recent Registrations</h3>
                             <ul className="list-disc pl-6 text-blue-600 space-y-2">
                                 <li>John Doe - Registered on 2025-03-15</li>
                                 <li>Jane Doe - Registered on 2025-03-16</li>
-                                <li>Bob Smith - Registered on 2025-03-17</li>
+                                <li>Bob Smik - Registered on 2025-03-17</li>
                             </ul>
                         </div>
 
                         {/* Pre-registration Summary */}
-                        <div className="box bg-yellow-100 rounded-lg shadow-md p-6 border border-black">
+                        <div className="box bg-red-100 rounded-lg shadow-md p-6 border border-black">
                             <h3 className="text-lg font-semibold text-yellow-800 mb-4">Pre-registration Summary</h3>
                             <p className="text-yellow-600">
                                 A total of 30 users have initiated pre-registration, awaiting verification.
@@ -78,10 +78,9 @@ function AdminDashboard() {
                         </div>
 
                         {/* Top Motorcycle Models */}
-                        <div className="box bg-green-100 rounded-lg shadow-md p-6 border border-black">
+                        <div className="box bg-red-100 rounded-lg shadow-md p-6 border border-black">
                             <h3 className="text-lg font-semibold text-green-800 mb-4">Top Motorcycle Models</h3>
                             <ul className="list-disc pl-6 text-green-600 space-y-2">
-                                <li>Harley-Davidson - 10 registrations</li>
                                 <li>Yamaha - 8 registrations</li>
                                 <li>Kawasaki - 6 registrations</li>
                             </ul>
