@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
+import LogoutConfirmationModal from '../components/LogoutConfirmationModal';
 
 interface User {
   id: number;
@@ -12,6 +13,8 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
+  showLogoutModal: boolean;
+  setShowLogoutModal: (show: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -19,6 +22,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -41,29 +45,60 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post('http://localhost:8000/api/login', {
-      email,
-      password,
-    });
-    
-    localStorage.setItem('token', response.data.token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-    setUser(response.data.user);
+    setLoading(true);
+    try {
+      const response = await axios.post('http://localhost:8000/api/login', {
+        email,
+        password,
+      });
+      
+      localStorage.setItem('token', response.data.token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+      setUser(response.data.user);
+    } catch (error) {
+      throw error; // Rethrow to handle in the component
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = async () => {
+    setLoading(true);
     try {
       await axios.post('http://localhost:8000/api/logout');
     } finally {
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
       setUser(null);
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setShowLogoutModal(false);
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{
+      user,
+      login,
+      logout,
+      loading,
+      showLogoutModal,
+      setShowLogoutModal,
+    }}>
       {children}
+      <LogoutConfirmationModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onConfirm={handleLogout}
+        loading={loading}
+      />
     </AuthContext.Provider>
   );
 };

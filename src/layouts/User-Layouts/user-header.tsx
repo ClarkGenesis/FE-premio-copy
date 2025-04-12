@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext.tsx';
 function Header() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const { logout } = useAuth();
+  const { setShowLogoutModal  } = useAuth();
 
   return (
     <header className="app-header sticky bg-red-600" id="header">
@@ -68,7 +68,7 @@ function Header() {
                   Settings
                 </Link>
                 <button
-                  onClick={logout}
+                  onClick={() => setShowLogoutModal(true)}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-300">
                   Logout
                 </button>
