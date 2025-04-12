@@ -1,10 +1,14 @@
 import { useState } from "react";
 import ProfIcon from '../../assets/images/faces/11.jpg';
 import { Link } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext.tsx';
+
 
 function Header() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const { setShowLogoutModal  } = useAuth();
+
 
   return (
     <header className="app-header sticky bg-red-600" id="header">
@@ -65,11 +69,11 @@ function Header() {
                   className="block px-3 py-2 text-gray-700 hover:bg-gray-300">
                   Settings
                 </Link>
-                <a
-                  href="/login"
+                <button
+                  onClick={() => setShowLogoutModal(true)}
                   className="block px-4 py-2 text-gray-700 hover:bg-gray-300">
                   Logout
-                </a>
+                </button>
               </div>
             )}
           </div>
