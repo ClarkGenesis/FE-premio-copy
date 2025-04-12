@@ -15,9 +15,18 @@ interface LoginResponse {
   user: User;
 }
 
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  role?: 'user' | 'admin'; // Optional, can be set default on backend
+}
+
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<User>;
+  register: (data: RegisterData) => Promise<User>;
   logout: () => Promise<void>;
   loading: boolean;
   error: string | null;
@@ -95,6 +104,45 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  const register = useCallback(async (data: RegisterData): Promise<User> => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Verify password match on client side first
+      if (data.password !== data.password_confirmation) {
+        throw new Error("Passwords don't match");
+      }
+
+      // Get CSRF cookie first if using Sanctum's web guard
+      await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+      
+      const response = await axios.post<LoginResponse>('http://localhost:8000/api/register', {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        password_confirmation: data.password_confirmation,
+        // role: 'user' // Can be set here or default on backend
+      }, {
+        withCredentials: true,
+      });
+      
+      localStorage.setItem('token', response.data.token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+      setUser(response.data.user);
+      return response.data.user;
+    } catch (err) {
+      const error = err as AxiosError<{ message?: string }> | Error;
+      const errorMessage = error instanceof AxiosError 
+        ? error.response?.data?.message || 'Registration failed. Please try again.'
+        : error.message;
+      setError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       setLoading(true);
@@ -129,6 +177,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider value={{
       user,
       login,
+      register,
       logout,
       loading,
       error,
