@@ -37,6 +37,7 @@ function Register () {
     if (!formData.name) newErrors.name = 'Name is required!';
     if (!formData.email) newErrors.email = 'Email is required!';
     if (!formData.password) newErrors.password = 'Password is required!';
+    if (!formData.birthdate) newErrors.birthdate = 'Birthdate is required!';
     if (formData.password !== formData.password_confirmation) {
       newErrors.password_confirmation = 'Passwords must match!';
     }
@@ -109,6 +110,7 @@ function Register () {
                     onChange={handleChange}
                     className="w-full p-2 text-sm border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
                   />
+                  {errors.birthdate && <p className="mt-1 text-[10px]" style={{color: 'red'}}>{errors.birthdate}</p>}
                 </div>
 
                 <div className="mb-4">

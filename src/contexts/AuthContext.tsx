@@ -2,11 +2,11 @@ import { createContext, useContext, useState, useEffect, ReactNode, useCallback 
 import axios, { AxiosError } from 'axios';
 import LogoutConfirmationModal from '../components/LogoutConfirmationModal';
 
-// Define more comprehensive types
 interface User {
   id: number;
   name: string;
   email: string;
+  birthdate: string; // ISO format date string (e.g., "1990-01-01")
   role: 'user' | 'admin';
 }
 
@@ -18,9 +18,10 @@ interface LoginResponse {
 interface RegisterData {
   name: string;
   email: string;
+  birthdate: string; // Added birthdate to RegisterData
   password: string;
   password_confirmation: string;
-  role?: 'user' | 'admin'; // Optional, can be set default on backend
+  role?: 'user' | 'admin';
 }
 
 interface AuthContextType {
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  // Initialize axios defaults and load user on mount
+  // Initialize axios defaults
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -61,11 +62,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (err) {
       const error = err as AxiosError;
-      console.error('Failed to load user', error);
       if (error.response?.status === 401) {
         localStorage.removeItem('token');
         delete axios.defaults.headers.common['Authorization'];
       }
+      console.error('Failed to load user', error);
     } finally {
       setLoading(false);
     }
@@ -80,7 +81,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       setError(null);
       
-      // Get CSRF cookie first if using Sanctum's web guard
       await axios.get('http://localhost:8000/sanctum/csrf-cookie');
       
       const response = await axios.post<LoginResponse>('http://localhost:8000/api/login', {
@@ -109,20 +109,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(true);
       setError(null);
       
-      // Verify password match on client side first
+      // Client-side validation
       if (data.password !== data.password_confirmation) {
         throw new Error("Passwords don't match");
       }
 
-      // Get CSRF cookie first if using Sanctum's web guard
+      // Validate birthdate format (YYYY-MM-DD)
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(data.birthdate)) {
+        throw new Error("Birthdate must be in YYYY-MM-DD format");
+      }
+
       await axios.get('http://localhost:8000/sanctum/csrf-cookie');
       
       const response = await axios.post<LoginResponse>('http://localhost:8000/api/register', {
         name: data.name,
         email: data.email,
+        birthdate: data.birthdate,
         password: data.password,
         password_confirmation: data.password_confirmation,
-        // role: 'user' // Can be set here or default on backend
       }, {
         withCredentials: true,
       });
