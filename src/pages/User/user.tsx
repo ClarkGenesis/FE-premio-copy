@@ -3,12 +3,15 @@ import Header from "../../layouts/User-Layouts/user-header";
 import Sidemenu from "../../layouts/User-Layouts/user-sidemenu";
 import User_avatar from "../../assets/photos/user-avatar.png";
 import Featured1 from "../../layouts/User-Layouts/featured";
+import { useAuth } from "../../contexts/AuthContext";
 
-function Dashboard() {
-const Pending = "Pending";
-const Approved = "Approved";
-const Disapproved = "Disapproved";
-const showStatus = false;
+const Dashboard = () => {
+  const { user } = useAuth();
+
+  const Pending = "Pending";
+  const Approved = "Approved";
+  const Disapproved = "Disapproved";
+  const showStatus = false;
 
 return (
   <>
@@ -31,7 +34,7 @@ return (
                 <p className="text-gray-700 font-medium">
                   <i>Welcome back!</i>
                   <br />
-                  <span className="font-bold text-gray-900">User</span>
+                  <span className="font-bold text-gray-900">{user?.name}</span>
                 </p>
               </div>
             </div>
