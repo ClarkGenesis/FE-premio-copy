@@ -71,7 +71,7 @@ function Header() {
                 </Link>
                 <button
                   onClick={() => setShowLogoutModal(true)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-300">
+                  className="text-left w-full  block px-4 py-2 text-gray-700 hover:bg-gray-300">
                   Logout
                 </button>
               </div>
