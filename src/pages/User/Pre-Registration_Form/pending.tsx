@@ -4,7 +4,7 @@ import Sidemenu from "../../../layouts/User-Layouts/user-sidemenu";
 import { Link } from "react-router-dom";
 
 function Pendings() {
-    let preRegistrationStatus = "Pending";
+    const preRegistrationStatus = "Pending";
 
   return (
     <>

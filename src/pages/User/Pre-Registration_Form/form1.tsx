@@ -1,6 +1,5 @@
 import Breadcrumb from "../../../components/user-breadcrums"
 import Header from "../../../layouts/User-Layouts/user-header"
-import Sidemenu from "../../../layouts/User-Layouts/user-sidemenu"
 import { Link } from "react-router-dom";
 import { useState, ChangeEvent, FormEvent } from "react";
 
@@ -26,6 +25,11 @@ interface FormData {
     municipality_city: string;
     province: string;
     length_of_stay: string;
+    prov_block_street: string;
+    prov_zone_purok: string;
+    prov_barangay: string;
+    prov_municipality_city: string;
+    prov_province: string;
 }
 const initialFormData: FormData = {
     firstName: "",
@@ -47,7 +51,12 @@ const initialFormData: FormData = {
     barangay: "",
     municipality_city: "",
     province: "",
-    length_of_stay: "", 
+    length_of_stay: "",
+    prov_block_street: "",
+    prov_zone_purok: "",
+    prov_barangay: "",
+    prov_municipality_city: "",
+    prov_province: "",
 };
 function Apply() {
     const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -63,16 +72,17 @@ function Apply() {
     return (
         <>
             <Header />
-            <Sidemenu />
-            <div className="main-content app-content">
+            <div className="main-content ">
                 <div className="container-fluid">
                 <Breadcrumb
-                        title="Credit Application Form  "
+                        title="Credit Application Form"
                         active="Personal Information"/>
                     <div className="grid grid-cols-12 gap-x-6">
                         <div className="xxl:col-span-12 col-span-12">
                             <div className="box overflow-hidden main-content-card">
-                                <div className="box-body p-5">  
+                                <div className="box-body p-5">
+
+                                {/* Forms Layouts 1 - 6*/}  
                                 <div className="col-span-12 mb-6">
                                     <div className="flex items-center justify-between relative">
                                         {[
@@ -110,6 +120,8 @@ function Apply() {
                                         <div className="mb-4 flex items-start gap-4">
                                         </div>
                                         <hr className="mt-3 mb-4" />
+
+                                            {/*Personal Information */}
                                             <div className="mb-4 flex items-start gap-4">
                                                 <h4 className="text-lg font-semibold">Personal Information</h4>
                                             </div>
@@ -139,6 +151,7 @@ function Apply() {
                                                 ))}
 
 
+                                                {/*Sex and Civil Status */}
                                                 {[  
                                                     ["Sex", "sex", ["Male", "Female"]],
                                                     ["Civil Status", "civil_status", ["Single", "Married", "Separated", "Widowed"]],
@@ -158,6 +171,8 @@ function Apply() {
                                                     </div>
                                                     
                                                 ))}
+
+                                                {/*Tin No, Res Cert No, Date Issued, Place Issued */}
                                                 {[
                                                     ["TIN No", "tin_no", "bi bi-file-earmark-text", "text"],
                                                     ["Res Cert No", "res_cert_no", "bi bi-card-heading", "text"],
@@ -179,7 +194,9 @@ function Apply() {
                                                 ))}
                                             </div>
 
-                                        <hr className="mt-3 mb-4" />
+                                            <hr className="mt-3 mb-4" />
+
+                                            {/*Present Address*/}
                                             <div className="mb-4 flex items-start gap-2">
                                                 <h4 className="text-lg font-semibold">Present Address</h4>
                                             </div>
@@ -210,7 +227,8 @@ function Apply() {
                                         
 
                                         <hr className="mt-2 mb-4" />
-                                            
+                                        
+                                        {/*HOME Checkbox */}
                                         <div className="p-3 rounded-md bg-gray-100 border w-3/4">
                                             <h3 className="text-lg font-semibold mb-1">HOME</h3>
                                             <div className="flex flex-wrap gap-4">
@@ -227,7 +245,7 @@ function Apply() {
                                                         <input
                                                             type="checkbox"
                                                             id={value}
-                                                            name="houseAndLotOwnershipStatus"
+                                                            name="house_and_lot"
                                                             value={value}
                                                             onChange={handleChange}
                                                             className="mr-2"
@@ -248,6 +266,9 @@ function Apply() {
                                             </div>
                                         </div>
 
+                                        <hr className="mt-2 mb-4" />
+                                        
+                                        {/*LOT Checkbox*/}
                                         <div className="p-3 rounded-md bg-gray-100 border w-3/4">
                                             <h3 className="text-lg font-semibold mb-1">LOT</h3>
                                             <div className="flex flex-wrap gap-4">
@@ -284,7 +305,91 @@ function Apply() {
                                                 ))}
                                             </div>
                                         </div>
-                                            
+
+                                        <hr className="mt-2 mb-4" />
+                                        
+                                        {/*OTHERS PROPERTIES checkbox */}
+                                        <div className="p-3 rounded-md bg-gray-100 border w-3/4">
+                                            <h3 className="text-lg font-semibold mb-1">OTHERS PROPERTIES</h3>
+                                            <div className="flex flex-wrap gap-4">
+                                                {[
+                                                    { label: "TV", value: "tv" },
+                                                    { label: "Ref", value: "ref" },
+                                                    { label: "Stereo/Component", value: "stereo_component" },
+                                                    { label: "Gas Range", value: "gas_range" },
+                                                    { label: "Motorcycle", value: "motorcycle" },
+                                                    { label: "Computers", value: "computers" },
+                                                    { label: "Farm/Lot Address", value: "farm_lot" },
+
+                                                ].map(({ label, value }) => (
+                                                    <div
+                                                        key={value}
+                                                        className="flex items-center border border-gray-300 rounded-md px-2 py-1 hover:bg-gray-200"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id={value}
+                                                            name="houseAndLotOwnershipStatus"
+                                                            value={value}
+                                                            onChange={handleChange}
+                                                            className="mr-2"
+                                                        />
+                                                        <label htmlFor={value} className="text-sm font-medium">
+                                                            {label}
+                                                        </label>
+                                                        {value === "farm_lot" && (
+                                                            <>
+                                                                <input
+                                                                    type="text"
+                                                                    name="farm_lot"
+                                                                    placeholder="Enter Farm/Lot Address"
+                                                                    className="ml-3 border border-gray-300 rounded-md px-1 py-0.5 text-sm"
+                                                                />
+                                                                <label htmlFor="farm_lot_size" className="ml-3 text-sm font-medium">&nbsp;Size&nbsp;</label>
+                                                                <input
+                                                                    type="number"
+                                                                    name="size"
+                                                                    placeholder="Enter Size"
+                                                                    className="ml-1 border border-gray-300 rounded-md px-1 py-0.5 text-sm"
+                                                                />
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <hr className="mt-3 mb-4" />
+
+                                            {/*Provincial Address Form*/}
+                                            <div className="mb-4 flex items-start gap-2">
+                                                <h4 className="text-lg font-semibold">Provincial Address</h4>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                                
+                                                {[
+                                                      ["Block/Street", "prov_block_street", "bi bi-signpost"],
+                                                      ["Zone/Purok", "prov_zone_purok", "bi bi-diagram-3"],
+                                                      ["Barangay", "_provbarangay", "bi bi-house-door"],
+                                                      ["Municipality/City", "prov_municipality_city", "bi bi-building"],
+                                                      ["Province", "prov_province", "bi bi-map"],
+                                                ].map(([label, name, icon, type="text"]) => (
+                                                    <div key={name} className="relative">
+                                                        <label className="block font-medium mb-1" htmlFor={name}>{label}</label>
+                                                        <div className="relative">
+                                                            <input type={type} id={name} name={name}
+                                                                onChange={handleChange}
+                                                                className="ti-form-input rounded-sm ps-11 focus:z-10"
+                                                                placeholder={` ${label}`} />
+                                                            <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
+                                                                <i className={icon}></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        
+                                        {/*Reset and Next Button*/}
                                         <div className="mt-4 flex justify-end gap-4">
                                             <button type="reset" className="bg-gray-300 px-4 py-2 rounded" onClick={() => setFormData(initialFormData)}>Reset</button>
                                             <Link to="/form2" type="submit" className="bg-green-500 text-white px-4 py-2 rounded flex items-center">

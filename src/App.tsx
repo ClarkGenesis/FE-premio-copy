@@ -28,13 +28,13 @@ import SuzukiG from './pages/User/MotorDetails/SuzukiGSX';
 import YamahaM from './pages/User/MotorDetails/YamahaMio';
 import YamahaZ from './pages/User/MotorDetails/YamahaYZF';
 
-import Apply from './pages/User/Apply-Registration/form1';
-import Apply2 from './pages/User/Apply-Registration/form2';
-import Apply3 from './pages/User/Apply-Registration/form3';
-import Apply4 from './pages/User/Apply-Registration/form4';
-import Apply5 from './pages/User/Apply-Registration/form5';
-import Apply6 from './pages/User/Apply-Registration/form6';
-import Pendings from './pages/User/Apply-Registration/pending';
+import Apply from './pages/User/Pre-Registration_Form/form1';
+import Apply2 from './pages/User/Pre-Registration_Form/form2';
+import Apply3 from './pages/User/Pre-Registration_Form/form3';
+import Apply4 from './pages/User/Pre-Registration_Form/form4';
+import Apply5 from './pages/User/Pre-Registration_Form/form5';
+import Apply6 from './pages/User/Pre-Registration_Form/form6';
+import Pendings from './pages/User/Pre-Registration_Form/pending';
 
 import HondaADV from './pages/User/MotorInstallment/Installment_HondaADV';
 import HondaX150 from './pages/User/MotorInstallment/Installment_HondaX';
