@@ -15,6 +15,7 @@
     "axios": "^1.8.4",
     "bootstrap-icons": "^1.11.3",
     "gridjs": "^6.2.0",
+    "lucide-react": "^0.487.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0"
