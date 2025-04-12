@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 
 function Login () {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,6 +22,8 @@ function Login () {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     try {
       const user = await login(email, password);
 
@@ -33,6 +38,8 @@ function Login () {
       }
     } catch (err) {
       setError('Failed to login. Please check your credentials.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -55,6 +62,7 @@ function Login () {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isSubmitting}
                   id="email"
                   placeholder="Enter your email"
                   className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
@@ -67,14 +75,27 @@ function Login () {
                   Password
                 </label>
                 <input
-                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  type={showPassword ? "text" : "password"}
                   required
+                  disabled={isSubmitting}
                   id="password"
                   placeholder="Enter your password"
                   className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                  {showPassword ? (
+                      <EyeOff className="h-5 w-5 text-gray-500" />
+                  ) : (
+                      <Eye className="h-5 w-5 text-gray-500" />
+                  )}
+              </button>
               </div>
 
               <div className="flex justify-center mt-2">
@@ -86,8 +107,17 @@ function Login () {
 
               <button
                 type="submit"
-                className="w-full py-2 text-white bg-red-600 rounded-lg focus:ring-red-500 focus:border-red-500 mt-4">
-                LOGIN
+                disabled={isSubmitting}
+                className="w-full py-2 text-white bg-red-600 rounded-lg focus:ring-red-500 focus:border-red-500 mt-4"
+                >
+                  {isSubmitting ? (
+                      <>
+                          <Loader2 className="animate-spin mr-2 h-4 w-4" />
+                          Logging in...
+                      </>
+                  ) : (
+                      "LOGIN"
+                  )}
               </button>
             </form>
 
