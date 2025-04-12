@@ -146,8 +146,8 @@ const App = () => {
 
       <Route path="/details" element={<Details />} />
 
-      <Route path="/user-management" element={<UserManagement />} />
-      <Route path="/edit-user" element={<EditUser />} />
+      <Route path="/user-management" element={<ProtectedRoute><UserManagement /></ProtectedRoute>} />
+      <Route path="/edit-user" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
 
       <Route path="/application-request" element={<ApplicationRequest />} />
 

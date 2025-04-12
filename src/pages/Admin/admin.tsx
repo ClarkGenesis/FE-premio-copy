@@ -2,8 +2,11 @@ import Breadcrumb from "../../components/admin-breadcrums";
 import Header from "../../layouts/Admin-Layouts/admin-header";
 import Sidemenu from "../../layouts/Admin-Layouts/admin-sidemenu";
 import User_avatar1 from '../../assets/images/faces/11.jpg';
+import { useAuth } from "../../contexts/AuthContext";
 
 function AdminDashboard() {
+    const { user } = useAuth();
+
     return (
         <>
             <Header />
@@ -25,7 +28,7 @@ function AdminDashboard() {
                                     />
                                     <p className="font-medium text-gray-700">
                                         <i>Welcome Back!</i><br />
-                                        <span className="font-bold text-gray-900">Administrator</span>
+                                        <span className="font-bold text-gray-900">{user?.name}</span>
                                     </p>
                                 </div>
                             </div>
