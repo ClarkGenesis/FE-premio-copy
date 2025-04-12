@@ -74,28 +74,29 @@ function Login () {
                   onClick={() => window.scrollTo({ top: 0})}>
                   Password
                 </label>
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type={showPassword ? "text" : "password"}
-                  required
-                  disabled={isSubmitting}
-                  id="password"
-                  placeholder="Enter your password"
-                  className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                  {showPassword ? (
-                      <EyeOff className="h-5 w-5 text-gray-500" />
-                  ) : (
-                      <Eye className="h-5 w-5 text-gray-500" />
-                  )}
-              </button>
+                <div className='relative'>
+                  <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type={showPassword ? "text" : "password"}
+                    required
+                    disabled={isSubmitting}
+                    id="password"
+                    placeholder="Enter your password"
+                    className="block w-full p-2 pr-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 flex items-center justify-center w-[50px]"
+                >
+                    {showPassword ? (
+                        <EyeOff className="h-5 w-5 text-gray-500" />
+                    ) : (
+                        <Eye className="h-5 w-5 text-gray-500" />
+                    )}
+                </button>
+                </div>
               </div>
 
               <div className="flex justify-center mt-2">
@@ -108,8 +109,12 @@ function Login () {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2 text-white bg-red-600 rounded-lg focus:ring-red-500 focus:border-red-500 mt-4"
-                >
+                className={`w-full py-2 text-white rounded-lg mt-4} ${
+                  isSubmitting
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-red-600 focus:ring-red-500 focus:border-red-500'
+                } flex items-center justify-center`}
+              >
                   {isSubmitting ? (
                       <>
                           <Loader2 className="animate-spin mr-2 h-4 w-4" />
