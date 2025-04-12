@@ -2,9 +2,28 @@ import Header from '../layouts/home-header';
 import Footer from "../layouts/home-footer";
 import Background from "../assets/photos/bg2.png";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login () {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+      navigate('/');
+    } catch (err) {
+      setError('Failed to login. Please check your credentials.');
+    }
+  };
+
   return (
     <>
       <div
@@ -14,13 +33,16 @@ function Login () {
         <div className="flex-1 flex justify-center items-center">
           <div className="max-w-md w-full mx-auto p-4 rounded-lg shadow-lg border border-black bg-white">
             <h2 className="text-center text-2xl mb-4 font-bold text-gray-800">Login</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
                   Email
                 </label>
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   id="email"
                   placeholder="Enter your email"
                   className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
@@ -34,6 +56,9 @@ function Login () {
                 </label>
                 <input
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                   id="password"
                   placeholder="Enter your password"
                   className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
@@ -48,7 +73,7 @@ function Login () {
               </div>
 
               <button
-                type="button"
+                type="submit"
                 className="w-full py-2 text-white bg-red-600 rounded-lg focus:ring-red-500 focus:border-red-500 mt-4">
                 LOGIN
               </button>
@@ -63,6 +88,7 @@ function Login () {
             </p>
 
             <hr className="my-6 border-gray-300" />
+            {error && <div style={{ color: 'red' }}>{error}</div>}
 
             <div className="mt-4">
               <button
