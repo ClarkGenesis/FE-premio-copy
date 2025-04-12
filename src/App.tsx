@@ -76,6 +76,8 @@ import View6 from './pages/Admin/View-Registration/aform6';
 
 import CreateDetail from './pages/Admin/create-details-motor';
 
+import ProtectedRoute from './components/ProtectedRoute';
+
 
 
 const App = () => {
@@ -93,13 +95,13 @@ const App = () => {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
 
-      <Route path="/user" element={<Dashboard />} />
-      <Route path="/featured" element={<Featured1 />} />
-      <Route path="/setting" element={<Settings />} />
-      <Route path="/my-pre-registrations" element={<My_Pre_Registrations />} />
-      <Route path="/motorcycles" element={<Motorcycles />} />
-      <Route path="/support-help" element={<Support_help />} />
-      <Route path="/profile" element={<Profiles />} />
+      <Route path="/user" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+      <Route path="/featured" element={<ProtectedRoute><Featured1 /></ProtectedRoute>} />
+      <Route path="/setting" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+      <Route path="/my-pre-registrations" element={<ProtectedRoute><My_Pre_Registrations /></ProtectedRoute>} />
+      <Route path="/motorcycles" element={<ProtectedRoute><Motorcycles /></ProtectedRoute>} />
+      <Route path="/support-help" element={<ProtectedRoute><Support_help /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><Profiles /></ProtectedRoute>} />
 
       <Route path="/HondaADV" element={<HondaA />} />
       <Route path="/HondaX" element={<HondaX />} />
@@ -127,11 +129,11 @@ const App = () => {
       <Route path="/Installment_YamahaMio" element={<YamahaMio />} />
       <Route path="/Installment_YamahaYZF" element={<YamahaYZF_R15 />} />
 
-      <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/admin-profile" element={<Profiles2 />} />
-      <Route path="/admin-setting" element={<AdminSettings />} />
-      <Route path="/admin-motorcycles" element={<AdminMotorcycles />} />
-      <Route path="/add-motorcycle" element={<AddMotorcycle />} />
+      <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+      <Route path="/admin-profile" element={<ProtectedRoute><Profiles2 /></ProtectedRoute>} />
+      <Route path="/admin-setting" element={<ProtectedRoute><AdminSettings /></ProtectedRoute>} />
+      <Route path="/admin-motorcycles" element={<ProtectedRoute><AdminMotorcycles /></ProtectedRoute>} />
+      <Route path="/add-motorcycle" element={<ProtectedRoute><AddMotorcycle /></ProtectedRoute>} />
 
       <Route path="/aHondaADV" element={<AdminHondaA />} />
       <Route path="/aHondaX" element={<AdminHondaX />} />
