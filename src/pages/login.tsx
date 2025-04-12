@@ -4,7 +4,7 @@ import Background from "../assets/photos/bg2.png";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Login () {
@@ -13,12 +13,24 @@ function Login () {
   const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      navigate('/user');
+      const user = await login(email, password);
+
+      if (user?.role === 'admin') {
+        navigate('/admin', { replace: true });
+      }
+      else if (user?.role === 'user') {
+        navigate('/user');
+      }
+      else {
+        navigate(from, { replace: true });
+      }
     } catch (err) {
       setError('Failed to login. Please check your credentials.');
     }

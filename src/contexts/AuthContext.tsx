@@ -1,20 +1,29 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import axios from 'axios';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import axios, { AxiosError } from 'axios';
 import LogoutConfirmationModal from '../components/LogoutConfirmationModal';
 
+// Define more comprehensive types
 interface User {
   id: number;
   name: string;
   email: string;
+  role: 'user' | 'admin';
+}
+
+interface LoginResponse {
+  token: string;
+  user: User;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<User>;
   logout: () => Promise<void>;
   loading: boolean;
+  error: string | null;
   showLogoutModal: boolean;
   setShowLogoutModal: (show: boolean) => void;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -22,66 +31,99 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
+  // Initialize axios defaults and load user on mount
   useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (token) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await axios.get('http://localhost:8000/api/user');
-          setUser(response.data);
-        }
-      } catch (error) {
-        console.error('Failed to load user', error);
-        localStorage.removeItem('token');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadUser();
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
   }, []);
 
-  const login = async (email: string, password: string) => {
-    setLoading(true);
+  const loadUser = useCallback(async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/login', {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      if (token) {
+        const response = await axios.get<User>('http://localhost:8000/api/user');
+        setUser(response.data);
+      }
+    } catch (err) {
+      const error = err as AxiosError;
+      console.error('Failed to load user', error);
+      if (error.response?.status === 401) {
+        localStorage.removeItem('token');
+        delete axios.defaults.headers.common['Authorization'];
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
+  const login = useCallback(async (email: string, password: string): Promise<User> => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Get CSRF cookie first if using Sanctum's web guard
+      await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+      
+      const response = await axios.post<LoginResponse>('http://localhost:8000/api/login', {
         email,
         password,
+      }, {
+        withCredentials: true,
       });
       
       localStorage.setItem('token', response.data.token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
       setUser(response.data.user);
-    } catch (error) {
-      throw error; // Rethrow to handle in the component
+      return response.data.user;
+    } catch (err) {
+      const error = err as AxiosError<{ message?: string }>;
+      const errorMessage = error.response?.data?.message || 'Login failed. Please try again.';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const logout = async () => {
-    setLoading(true);
+  const logout = useCallback(async () => {
     try {
-      await axios.post('http://localhost:8000/api/logout');
+      setLoading(true);
+      await axios.post('http://localhost:8000/api/logout', {}, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+    } catch (err) {
+      console.error('Logout error:', err);
     } finally {
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
       setUser(null);
       setLoading(false);
     }
-  };
+  }, []);
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     try {
       await logout();
       setShowLogoutModal(false);
-    } catch (error) {
-      console.error('Logout failed:', error);
+    } catch (err) {
+      const error = err as Error;
+      setError(error.message);
     }
-  };
+  }, [logout]);
+
+  const clearError = useCallback(() => setError(null), []);
 
   return (
     <AuthContext.Provider value={{
@@ -89,8 +131,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       login,
       logout,
       loading,
+      error,
       showLogoutModal,
       setShowLogoutModal,
+      clearError,
     }}>
       {children}
       <LogoutConfirmationModal
