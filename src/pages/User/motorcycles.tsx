@@ -1,7 +1,7 @@
     import React from "react";
-    import Breadcrumb from "../../components/user-breadcrums";
-    import Header from "../../layouts/User-Layouts/user-header";
-    import Sidemenu from "../../layouts/User-Layouts/user-sidemenu";
+    import Breadcrumb from "../../components/UserBreadcrums";
+    import Header from "../../layouts/UserLayouts/UserHeader";
+    import Sidemenu from "../../layouts/UserLayouts/UserSidemenu";
     import Honda_winnerX from "../../assets/photos/motors/hondax.png";
     import Honda_ADV_160 from "../../assets/photos/motors/hondaa.png";
     import Suzuki_Raider_Fi_150 from "../../assets/photos/motors/suzuki.png";
@@ -20,14 +20,14 @@
         const itemsPerPage = 10;
 
         const motorcycles = [
-            { id: 1, brand: "Honda", model: "Honda WINNER X", price: "131,900", downpayment: "26,380", monthly: "5,483", image: Honda_winnerX, Link: "/Hondax" },
-            { id: 2, brand: "Honda", model: "Honda ADV 160", price: "164,900", downpayment: "32,980", monthly: "6,867", image: Honda_ADV_160, Link: "/HondaADV" },
-            { id: 3, brand: "Suzuki", model: "Suzuki Raider Fi 150", price: "119,900", downpayment: "23,980", monthly: "4,992", image: Suzuki_Raider_Fi_150, Link: "/SuzukiFI" },
-            { id: 4, brand: "Suzuki", model: "Suzuki GSX-S150", price: "133,900", downpayment: "26,780", monthly: "5,567", image: Suzuki_Raider, Link: "/SuzukiGSX" },
-            { id: 5, brand: "Kawasaki", model: "Kawasaki KLX150", price: "129,900", downpayment: "25,980", monthly: "5,408", image: Kawasaki_klx, Link: "/KawasakiKLX" },
-            { id: 6, brand: "Kawasaki", model: "Kawasaki Dominar 400", price: "208,900", downpayment: "41,780", monthly: "8,680", image: Kawasaki_domi, Link: "/KawasakiDomi" },
-            { id: 7, brand: "Yamaha", model: "Yamaha Mio Gear 125", price: "77,400", downpayment: "15,480", monthly: "3,210", image: Yamaha_Mio_Gear_125, Link: "/YamahaMio" },
-            { id: 8, brand: "Yamaha", model: "Yamaha YZF-R15M", price: "203,000", downpayment: "40,600", monthly: "8,446", image: Yamaha_xsr, Link: "/YamahaYZF" },
+            { id: 1, brand: "Honda", model: "Honda WINNER X", price: "131,900", image: Honda_winnerX, Link: "/Hondax" },
+            { id: 2, brand: "Honda", model: "Honda ADV 160", price: "164,900",image: Honda_ADV_160, Link: "/HondaADV" },
+            { id: 3, brand: "Suzuki", model: "Suzuki Raider Fi 150", price: "119,900", image: Suzuki_Raider_Fi_150, Link: "/SuzukiFI" },
+            { id: 4, brand: "Suzuki", model: "Suzuki GSX-S150", price: "133,900",  image: Suzuki_Raider, Link: "/SuzukiGSX" },
+            { id: 5, brand: "Kawasaki", model: "Kawasaki KLX150", price: "129,900",  image: Kawasaki_klx, Link: "/KawasakiKLX" },
+            { id: 6, brand: "Kawasaki", model: "Kawasaki Dominar 400", price: "208,900", image: Kawasaki_domi, Link: "/KawasakiDomi" },
+            { id: 7, brand: "Yamaha", model: "Yamaha Mio Gear 125", price: "77,400", image: Yamaha_Mio_Gear_125, Link: "/YamahaMio" },
+            { id: 8, brand: "Yamaha", model: "Yamaha YZF-R15M", price: "203,000", image: Yamaha_xsr, Link: "/YamahaYZF" },
         ];
 
         const filteredMotorcycles = motorcycles.filter((motorcycle) => {
@@ -124,9 +124,7 @@
                                         />
                                         <h3 className="text-lg font-semibold text-gray-800">{motorcycle.model}</h3>
                                         <div className="bg-red-600 text-white rounded p-3 mt-1">
-                                            <p className="font-bold">Price: ₱{motorcycle.price}.00</p>
-                                            <p className="font-bold">Downpayment: ₱{motorcycle.downpayment}.00</p>
-                                            <p>Monthly: ₱{motorcycle.monthly}.00</p>
+                                            <h6 className="font-bold text-white">₱{motorcycle.price}.00</h6>
                                         </div>
                                     </div>
                                 </Link>

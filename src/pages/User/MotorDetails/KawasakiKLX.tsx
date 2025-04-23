@@ -1,6 +1,6 @@
-import Breadcrumb from "../../../components/user-breadcrums"
-import Header from "../../../layouts/User-Layouts/user-header"
-import Sidemenu from "../../../layouts/User-Layouts/user-sidemenu"
+import Breadcrumb from "../../../components/UserBreadcrums"
+import Header from "../../../layouts/UserLayouts/UserHeader"
+import Sidemenu from "../../../layouts/UserLayouts/UserSidemenu"
 import Kawasaki_domi from "../../../assets/photos/motors/kawasaki-domi.png";
 import Kawasaki_klx from "../../../assets/photos/motors/kawasaki.png";
 import { Link } from "react-router-dom";
@@ -37,9 +37,9 @@ function KawasakiK() {
 
                                         <div className="flex flex-col gap-2 m-2 p-2 mt-4 ">
                                             <Link 
-                                                to="/form"
+                                                to="/1FormAddressInfo"
                                                 className="w-60 text-center px-4 py-2 rounded-lg text-white bg-blue-600 border border-black"
-                                            >
+                                                onClick={() => window.scrollTo({ top: 0})}>
                                                 <i className="bi bi-pencil-square"></i> Pre-Register
                                             </Link>
                                             <Link 

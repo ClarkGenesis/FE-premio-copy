@@ -1,6 +1,6 @@
-import Breadcrumb from "../../components/user-breadcrums";
-import Header from "../../layouts/User-Layouts/user-header";
-import Sidemenu from "../../layouts/User-Layouts/user-sidemenu";
+import Breadcrumb from "../../components/UserBreadcrums";
+import Header from "../../layouts/UserLayouts/UserHeader";
+import Sidemenu from "../../layouts/UserLayouts/UserSidemenu";
 import { useState, ChangeEvent, FormEvent } from "react";
 import ProfileImage from "../../assets/photos/user-avatar.png";
 
@@ -110,14 +110,6 @@ function Profiles() {
                                             </div>
                                         </div>
                                     ))}
-                                </div>
-
-                                <div className="mt-4">
-                                    <label className="block font-medium mb-1" htmlFor="biography">Biographical
-                                        Info</label>
-                                        <textarea id="biography" name="biography" rows={3}
-                                            className="w-full px-3 py-2 border rounded focus:outline-none"
-                                            placeholder="Write a short bio..." />
                                 </div>
 
                                 <div className="mt-4 flex justify-end gap-4">

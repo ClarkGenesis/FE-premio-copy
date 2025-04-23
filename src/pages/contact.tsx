@@ -1,5 +1,5 @@
-import Header from "../layouts/home-header";
-import Footer from "../layouts/home-footer";
+import Header from "../layouts/HomeHeader";
+import Footer from "../layouts/HomeFooter";
 import Background from "../assets/photos/bg2.png";
 
 function Contact() {
@@ -9,7 +9,7 @@ function Contact() {
         className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${Background})` }}>
         <Header />
-        <div className="flex-1 flex justify-center items-center backdrop-blur-md">
+        <div className="flex-1 flex justify-center items-center">
           <div className="w-full max-w-2xl mx-4 p-6 rounded-lg shadow-lg border border-black bg-white bg-opacity-50 backdrop-blur-lg flex gap-6">
 
             <div className="w-1/2">

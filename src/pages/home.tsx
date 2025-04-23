@@ -1,6 +1,6 @@
-import Header from "../layouts/home-header";
-import Footer from "../layouts/home-footer";
-import Featured from "../layouts/home-featured";
+import Header from "../layouts/HomeHeader";
+import Footer from "../layouts/HomeFooter";
+import Featured from "../layouts/HomeFeatured";
 import background3 from "../assets/photos/bg5.png";
 
 function Home() {

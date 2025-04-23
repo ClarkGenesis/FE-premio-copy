@@ -1,5 +1,5 @@
-import Header from '../layouts/home-header';
-import Footer from "../layouts/home-footer";
+import Header from '../layouts/HomeHeader';
+import Footer from "../layouts/HomeFooter";
 import Background from "../assets/photos/bg2.png";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -37,6 +37,7 @@ function Login () {
         navigate(from, { replace: true });
       }
     } catch (err) {
+      console.error(err);
       setError('Failed to login. Please check your credentials.');
     } finally {
       setIsSubmitting(false);
@@ -129,22 +130,13 @@ function Login () {
             <p className="text-center mt-4">
               Don't have an account?{' '}
               <Link to="/register" className="text-blue-600 hover:underline font-medium"
-                onClick={() => window.scrollTo({ top: 100})}>
+                onClick={() => window.scrollTo({ top: 0})}>
                 Register
               </Link>
             </p>
 
             <hr className="my-6 border-gray-300" />
             {error && <div style={{ color: 'red' }}>{error}</div>}
-
-            <div className="mt-4">
-              <button
-                type="button"
-                className="w-full py-2 flex items-center justify-center bg-white border border-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                <i className="bi bi-google px-4"></i>
-                Login with Google
-              </button>
-            </div>
           </div>
         </div>
       </div>

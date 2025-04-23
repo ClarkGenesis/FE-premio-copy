@@ -1,5 +1,5 @@
-import Header from '../layouts/home-header';
-import Footer from "../layouts/home-footer";
+import Header from '../layouts/HomeHeader';
+import Footer from "../layouts/HomeFooter";
 import Background from "../assets/photos/bg2.png";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -51,6 +51,7 @@ function Register () {
       await register(formData);
       navigate('/user'); // Redirect after successful registration
     } catch (err) {
+      console.error(err);
       // Error is already handled in the auth context
     }
   };
@@ -60,7 +61,7 @@ function Register () {
       <div
         className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat pt-8"
         style={{ backgroundImage: `url(${Background})` }}>
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen mt-6">
           <Header />
           <div className="flex-1 flex justify-center items-center">
             <div className="max-w-md w-full p-4 rounded-lg shadow-lg border-black bg-white">

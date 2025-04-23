@@ -2,11 +2,12 @@ import { createContext, useContext, useState, useEffect, ReactNode, useCallback 
 import axios, { AxiosError } from 'axios';
 import LogoutConfirmationModal from '../components/LogoutConfirmationModal';
 
+// Define types and interfaces in a separate file or within this file but outside the component
 interface User {
   id: number;
   name: string;
   email: string;
-  birthdate: string; // ISO format date string (e.g., "1990-01-01")
+  birthdate: string;
   role: 'user' | 'admin';
 }
 
@@ -18,7 +19,7 @@ interface LoginResponse {
 interface RegisterData {
   name: string;
   email: string;
-  birthdate: string; // Added birthdate to RegisterData
+  birthdate: string;
   password: string;
   password_confirmation: string;
   role?: 'user' | 'admin';
@@ -80,16 +81,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setLoading(true);
       setError(null);
-      
+
       await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-      
+
       const response = await axios.post<LoginResponse>('http://localhost:8000/api/login', {
         email,
         password,
       }, {
         withCredentials: true,
       });
-      
+
       localStorage.setItem('token', response.data.token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
       setUser(response.data.user);
@@ -108,7 +109,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Client-side validation
       if (data.password !== data.password_confirmation) {
         throw new Error("Passwords don't match");
@@ -120,7 +121,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-      
+
       const response = await axios.post<LoginResponse>('http://localhost:8000/api/register', {
         name: data.name,
         email: data.email,
@@ -130,14 +131,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }, {
         withCredentials: true,
       });
-      
+
       localStorage.setItem('token', response.data.token);
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
       setUser(response.data.user);
       return response.data.user;
     } catch (err) {
       const error = err as AxiosError<{ message?: string }> | Error;
-      const errorMessage = error instanceof AxiosError 
+      const errorMessage = error instanceof AxiosError
         ? error.response?.data?.message || 'Registration failed. Please try again.'
         : error.message;
       setError(errorMessage);

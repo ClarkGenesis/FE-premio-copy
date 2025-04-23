@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import Breadcrumb from "../../../components/user-breadcrums";
-import Header from "../../../layouts/User-Layouts/user-header";
-import Sidemenu from "../../../layouts/User-Layouts/user-sidemenu";
+import Breadcrumb from "../../../components/UserBreadcrums";
+import Header from "../../../layouts/UserLayouts/UserHeader";
+import Sidemenu from "../../../layouts/UserLayouts/UserSidemenu";
 
 function KawasakiDomi() {
     const [income, setIncome] = useState("");

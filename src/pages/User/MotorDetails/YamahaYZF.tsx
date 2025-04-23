@@ -1,6 +1,6 @@
-import Breadcrumb from "../../../components/user-breadcrums"
-import Header from "../../../layouts/User-Layouts/user-header"
-import Sidemenu from "../../../layouts/User-Layouts/user-sidemenu"
+import Breadcrumb from "../../../components/UserBreadcrums"
+import Header from "../../../layouts/UserLayouts/UserHeader"
+import Sidemenu from "../../../layouts/UserLayouts/UserSidemenu"
 import Yamaha_Mio_Gear_125 from "../../../assets/photos/motors/mio_gear125.png"
 import Yamaha_xsr from "../../../assets/photos/motors/yamaha-yzf.png"
 import { Link } from "react-router-dom";
@@ -40,9 +40,9 @@ function YamahaZ() {
 
                                         <div className="flex flex-col gap-2 m-2 p-2 mt-4 ">
                                             <Link 
-                                                to="/form"
+                                                to="/1FormAddressInfo"
                                                 className="w-60 text-center px-4 py-2 rounded-lg text-white bg-blue-600 border border-black"
-                                            >
+                                                onClick={() => window.scrollTo({ top: 0})}>
                                                 <i className="bi bi-pencil-square"></i> Pre-Register
                                             </Link>
                                             <Link 
@@ -58,7 +58,7 @@ function YamahaZ() {
 
                                 <h4 className="mt-4 mb-2">Description</h4>
                                 <p className="text-gray-700">
-                                The YZF-R15M redefines innovation on the racetrack. A highly precise machine that has been crafted for superior performance, advanced with the latest technology, and designed true to the R brand. Now enhanced with Y-Connect compatibility, linking you with your motorcycle for a whole new experience.​
+                                The YZF-R15M redefines innovation on the racetrack. A highly precise machine that has been crafted for superior performance, advanced with the latest technology, and designed true to the R brand. Now enhanced with Y-Connect compatibility, linking you with your motorcycle for a whole new experience.
                                 </p>
 
                                 <h4 className="mt-6 mb-2 flex ">Specification</h4>

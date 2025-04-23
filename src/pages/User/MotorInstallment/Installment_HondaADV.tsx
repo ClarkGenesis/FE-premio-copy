@@ -1,60 +1,65 @@
 import { useState } from "react";
 
-import Breadcrumb from "../../../components/user-breadcrums";
-import Header from "../../../layouts/User-Layouts/user-header";
-import Sidemenu from "../../../layouts/User-Layouts/user-sidemenu";
+import Breadcrumb from "../../../components/UserBreadcrums";
+import Header from "../../../layouts/UserLayouts/UserHeader";
+import Sidemenu from "../../../layouts/UserLayouts/UserSidemenu";
 
 function HondaADV() {
-    const [income, setIncome] = useState("");
-    const [downPayment, setDownPayment] = useState("");
-    const [interestRate, setInterestRate] = useState(5); // Default interest rate
-    const [approvableLoan, setApprovableLoan] = useState(0);
-    const [totalCashout, setTotalCashout] = useState(0);
-    const [monthlyPayments, setMonthlyPayments] = useState<{ term: number; monthlyPayment: string }[]>([]);
+    // State variables to manage user inputs and calculated results
+    const [income, setIncome] = useState(""); // Customer's estimated income
+    const [downPayment, setDownPayment] = useState(""); // Down payment input
+    const [interestRate, setInterestRate] = useState(5); // Default interest rate (5%)
+    const [approvableLoan, setApprovableLoan] = useState(0); // Loan amount that can be approved
+    const [totalCashout, setTotalCashout] = useState(0); // Total cash out required
+    const [monthlyPayments, setMonthlyPayments] = useState<{ term: number; monthlyPayment: string }[]>([]); // Monthly payment plans
 
-    const hondaADV160Price = 164900; // Price in PHP
-    const registrationFee = 1500;
-    const docsStampFee = 600;
+    // Constants for the motorcycle price and additional fees
+    const hondaADV160Price = 164900; // Price of Honda ADV 160 in PHP
+    const registrationFee = 1500; // Registration fee
+    const docsStampFee = 600; // Documentary stamp fee
 
-    // Loan terms from financing companies (Example: Banks, Lenders)
+    // Financing options with different interest rates
     const financingOptions = [
-        { label: "Standard Bank Loan", rate: 5 },
-        { label: "Flexible Financing", rate: 4.5 },
-        { label: "Premium Financing", rate: 6 },
+        { label: "Standard Bank Loan", rate: 5 }, // 5% interest rate
+        { label: "Flexible Financing", rate: 4.5 }, // 4.5% interest rate
+        { label: "Premium Financing", rate: 6 }, // 6% interest rate
     ];
 
+    // Function to calculate the installment details
     const calculateInstallment = () => {
-        const downPaymentValue = Number(downPayment) || 0;
+        const downPaymentValue = Number(downPayment) || 0; // Convert down payment to a number
         if (downPaymentValue <= 0) {
-            alert("Please enter a valid down payment.");
+            alert("Please enter a valid down payment."); // Validate down payment
             return;
         }
 
         if (downPaymentValue > hondaADV160Price) {
-            alert("Down payment cannot exceed the motorcycle price.");
+            alert("Down payment cannot exceed the motorcycle price."); // Ensure down payment is not greater than the price
             return;
         }
 
+        // Calculate the loan amount
         const loanAmount = hondaADV160Price - downPaymentValue;
-        setApprovableLoan(loanAmount);
+        setApprovableLoan(loanAmount); // Update approvable loan state
 
+        // Calculate the total cash out (down payment + fees)
         const cashOut = downPaymentValue + registrationFee + docsStampFee;
-        setTotalCashout(cashOut);
+        setTotalCashout(cashOut); // Update total cash out state
 
-        // Calculate monthly payments
-        const terms = [12, 18, 24, 30, 36];
-        const monthlyInterest = (interestRate / 100) / 12; // Convert annual interest rate percentage to monthly rate
-        
+        // Define loan terms in months
+        const terms = [12, 18, 24, 30, 36]; // Loan terms in months
+        const monthlyInterest = (interestRate / 100) / 12; // Convert annual interest rate to monthly rate
+
+        // Calculate monthly payments for each term
         const payments = terms.map((term) => {
             const monthlyPayment = loanAmount > 0
                 ? (loanAmount * monthlyInterest) /
-                  (1 - Math.pow(1 + monthlyInterest, -term))
-                : 0; // Ensure no calculation is done for invalid loan amounts
-            return { term, monthlyPayment: monthlyPayment.toFixed(2) };
+                  (1 - Math.pow(1 + monthlyInterest, -term)) // Formula for monthly payment
+                : 0; 
+            return { term, monthlyPayment: monthlyPayment.toFixed(2) }; // Format monthly payment to 2 decimal places
         });
-        
 
-        setMonthlyPayments(payments);
+        setMonthlyPayments(payments); // Update monthly payments state
     };
 
     return (
