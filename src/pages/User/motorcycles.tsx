@@ -115,7 +115,8 @@
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {paginatedMotorcycles.map((motorcycle) => (
-                                <Link to={motorcycle.Link} key={motorcycle.id} className="block">
+                                <Link to={motorcycle.Link} key={motorcycle.id} className="block"
+                                    onClick={() => window.scrollTo({ top: 0})}>
                                     <div className="border p-3 rounded shadow-sm hover:shadow-lg transition">
                                         <img
                                             src={motorcycle.image}
